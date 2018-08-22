@@ -13,6 +13,7 @@ import com.rafael.cursomc.cursomc.domain.Cidade;
 import com.rafael.cursomc.cursomc.domain.Cliente;
 import com.rafael.cursomc.cursomc.domain.Endereco;
 import com.rafael.cursomc.cursomc.domain.Estado;
+import com.rafael.cursomc.cursomc.domain.ItemPedido;
 import com.rafael.cursomc.cursomc.domain.Pagamento;
 import com.rafael.cursomc.cursomc.domain.PagamentoComBoleto;
 import com.rafael.cursomc.cursomc.domain.PagamentoComCartao;
@@ -123,6 +124,7 @@ public class CursomcApplication implements CommandLineRunner{
 				
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
+		
 		
 	}
 }
