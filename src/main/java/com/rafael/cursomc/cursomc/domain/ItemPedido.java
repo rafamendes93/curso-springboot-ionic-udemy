@@ -1,14 +1,16 @@
 package com.rafael.cursomc.cursomc.domain;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import java.io.Serializable;
 
 @Entity
 public class ItemPedido implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
+	@JsonIgnore
 	@EmbeddedId
 	private ItemPedidoPK id = new ItemPedidoPK();
 	
@@ -61,10 +63,11 @@ public class ItemPedido implements Serializable {
 	
 	//As funções getPedido e getProduto são usadas para melhorar a semantica dessa classe
 	//para que não seja preciso faze ItemPedido.getId.getPedido por exemplo
+	@JsonIgnore
 	public Pedido getPedido() {
 		return id.getPedido();
 	}
-	
+
 	public Produto getProduto() {
 		return id.getProduto();
 	}
