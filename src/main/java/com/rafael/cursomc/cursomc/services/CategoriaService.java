@@ -14,7 +14,7 @@ public class CategoriaService {
 	@Autowired
 	private CategoriaRepository repo;
 	
-	public Categoria buscar(Integer id) {
+	public Categoria find(Integer id) {
 		
 		//Implementação do JAVA 8, objeto OPTIONAL que encapsula uma categoria
 		//Optional pois ele é opcional (objeto ou nulo) para evitar nullpointerException
@@ -29,6 +29,11 @@ public class CategoriaService {
 
 	public Categoria insert (Categoria obj){
 		obj.setId(null);
+		return repo.save(obj);
+	}
+
+	public Categoria update(Categoria obj){
+		find(obj.getId());
 		return repo.save(obj);
 	}
 }
