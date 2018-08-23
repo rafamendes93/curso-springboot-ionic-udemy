@@ -1,13 +1,12 @@
 package com.rafael.cursomc.cursomc.services;
 
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.rafael.cursomc.cursomc.domain.Categoria;
 import com.rafael.cursomc.cursomc.repositories.CategoriaRepository;
 import com.rafael.cursomc.cursomc.services.exception.ObjectNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class CategoriaService {
@@ -26,5 +25,10 @@ public class CategoriaService {
 				-> new ObjectNotFoundException("Objeto não encontrado na base de dados:" + id
 						+ " Tipo: " + Categoria.class.getName()));
 		
+	}
+
+	public Categoria insert (Categoria obj){
+		obj.setId(null);
+		return repo.save(obj);
 	}
 }
