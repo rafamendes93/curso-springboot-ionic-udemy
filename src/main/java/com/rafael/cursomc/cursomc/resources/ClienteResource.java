@@ -2,13 +2,16 @@ package com.rafael.cursomc.cursomc.resources;
 
 import com.rafael.cursomc.cursomc.domain.Cliente;
 import com.rafael.cursomc.cursomc.dto.ClienteDTO;
+import com.rafael.cursomc.cursomc.dto.ClienteNewDTO;
 import com.rafael.cursomc.cursomc.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -65,6 +68,17 @@ public class ClienteResource {
 		Page<ClienteDTO> listaDTO = list.map(obj -> new ClienteDTO(obj));
 
 		return ResponseEntity.ok().body(listaDTO);
+	}
+
+	@RequestMapping(method = RequestMethod.POST)
+	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDTO){
+		Cliente obj = service.fromDTO(objDTO);
+		obj = service.insert(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+				.path("/{id}").buildAndExpand(obj.getId()).toUri();
+
+		return ResponseEntity.created(uri).build();
+
 	}
 
 
