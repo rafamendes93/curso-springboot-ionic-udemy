@@ -1,20 +1,40 @@
 package com.rafael.cursomc.cursomc.dto;
 
+import com.rafael.cursomc.cursomc.services.validation.ClienteInsert;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
+@ClienteInsert
 public class ClienteNewDTO implements Serializable {
 
+    @NotEmpty(message = "O nome não pode estar vazio")
+    @Length(min = 5,max = 120,message = "O nome deve ter entre 5 e 120 caracteres")
     private String nome;
+
+    @NotEmpty(message = "O email não pode estar vazio")
+    @Email(message = "Email inválido")
     private String email;
+
+    @NotEmpty(message = "O CPF/CNPJ não pode estar vazio")
     private String cpfOuCnpj;
+
     private Integer tipo;
 
+    @NotEmpty(message = "O e-mail não pode estar vazio")
     private String logradouro;
+
     private String numero;
     private String complemento;
+
     private String bairro;
+
+    @NotEmpty(message = "O CEP não pode estar vazio")
     private String cep;
 
+    @NotEmpty(message = "O telefone não pode estar vazio")
     private String telefone1;
     private String telefone2;
     private String telefone3;
