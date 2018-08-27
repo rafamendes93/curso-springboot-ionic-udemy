@@ -66,10 +66,18 @@ public class ItemPedido implements Serializable {
 	}
 	
 	//As funções getPedido e getProduto são usadas para melhorar a semantica dessa classe
-	//para que não seja preciso faze ItemPedido.getId.getPedido por exemplo
+	//para que não seja preciso fazer ItemPedido.getId.getPedido por exemplo
 	@JsonIgnore
 	public Pedido getPedido() {
 		return id.getPedido();
+	}
+
+	public void setPedido(Pedido pedido){
+		id.setPedido(pedido);
+	}
+
+	public void setProduto (Produto produto){
+		id.setProduto(produto);
 	}
 
 	public Produto getProduto() {
