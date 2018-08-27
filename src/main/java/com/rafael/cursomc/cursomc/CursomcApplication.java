@@ -17,25 +17,25 @@ public class CursomcApplication implements CommandLineRunner{
 	
 	@Autowired
 	private CategoriaRepository categoriaRepository;
-	
+
 	@Autowired
 	private ProdutoRepository produtoRepository;
-	
+
 	@Autowired
 	private EstadoRepository estadoRepository;
-	
+
 	@Autowired
 	private CidadeRepository cidadeRepository;
-	
+
 	@Autowired
 	private ClienteRepository clienteRepository;
-	
+
 	@Autowired
 	private EnderecoRepository enderecoRepository;
-	
+
 	@Autowired
 	private PagamentoRepository pagamentoRepository;
-	
+
 	@Autowired
 	private PedidoRepository pedidoRepository;
 
@@ -49,35 +49,61 @@ public class CursomcApplication implements CommandLineRunner{
 	//Roda o código ao iniciar o spring boot
 	@Override
 	public void run(String... args) throws Exception {
-		
-		Categoria categoria = new Categoria(null, "Informática");
-		Categoria categoria2 = new Categoria(null, "Escritório");
-		Categoria categoria3 = new Categoria(null, "Casa mesa e banho");
-		Categoria categoria4 = new Categoria(null, "Eletrônicos");
-		Categoria categoria5 = new Categoria(null, "Jardinagem");
-		Categoria categoria6 = new Categoria(null, "Perfumaria");
-		Categoria categoria7 = new Categoria(null, "Roupas Masculinas");
-		Categoria categoria8 = new Categoria(null, "Roupas Femininas");
-		Categoria categoria9 = new Categoria(null, "Decoração");
+
+		Categoria cat = new Categoria(null, "Informática");
+		Categoria cat2 = new Categoria(null, "Escritório");
+		Categoria cat3 = new Categoria(null, "Casa mesa e banho");
+		Categoria cat4 = new Categoria(null, "Eletrônicos");
+		Categoria cat5 = new Categoria(null, "Jardinagem");
+		Categoria cat6 = new Categoria(null, "Perfumaria");
+		Categoria cat7 = new Categoria(null, "Roupas Masculinas");
+		Categoria cat8 = new Categoria(null, "Roupas Femininas");
+		Categoria cat9 = new Categoria(null, "Decoração");
 
 
 
-		
+
 		Produto p1 = new Produto(null, "Computador", 2000.00);
 		Produto p2 = new Produto(null, "Impressora", 800.00);
 		Produto p3 = new Produto(null, "Mouse", 80.00);
-		
-		categoria.getProdutos().addAll(Arrays.asList(p1,p2,p3));
-		categoria2.getProdutos().addAll(Arrays.asList(p2));
-		
-		p1.getCategorias().addAll(Arrays.asList(categoria));
-		p2.getCategorias().addAll(Arrays.asList(categoria,categoria2));
+		Produto p4 = new Produto(null, "Mesa de escritório", 300.00);
+		Produto p5 = new Produto(null, "Toalha", 50.00);
+		Produto p6 = new Produto(null, "Colcha", 200.00);
+		Produto p7 = new Produto(null, "TV true color", 1200.00);
+		Produto p8 = new Produto(null, "Roçadeira", 800.00);
+		Produto p9 = new Produto(null, "Abajour", 100.00);
+		Produto p10 = new Produto(null, "Pendente", 180.00);
+		Produto p11 = new Produto(null, "Shampoo", 90.00);
 
-		p3.getCategorias().addAll(Arrays.asList(categoria));
-		
-		categoriaRepository.saveAll(Arrays.asList(categoria,categoria2,categoria3,categoria4,categoria5,
-				categoria6,categoria7,categoria8,categoria9));
-		produtoRepository.saveAll(Arrays.asList(p1,p2,p3));
+		cat.getProdutos().addAll(Arrays.asList(p1,p2,p3));
+		cat2.getProdutos().addAll(Arrays.asList(p2));
+
+		p1.getCategorias().addAll(Arrays.asList(cat));
+		p2.getCategorias().addAll(Arrays.asList(cat,cat2));
+		p3.getCategorias().addAll(Arrays.asList(cat));
+
+		cat2.getProdutos().addAll(Arrays.asList(p2, p4));
+		cat3.getProdutos().addAll(Arrays.asList(p5, p6));
+		cat4.getProdutos().addAll(Arrays.asList(p1, p2, p3, p7));
+		cat5.getProdutos().addAll(Arrays.asList(p8));
+		cat6.getProdutos().addAll(Arrays.asList(p9, p10));
+		cat7.getProdutos().addAll(Arrays.asList(p11));
+
+		p1.getCategorias().addAll(Arrays.asList(cat, cat4));
+		p2.getCategorias().addAll(Arrays.asList(cat, cat2, cat4));
+		p3.getCategorias().addAll(Arrays.asList(cat, cat4));
+		p4.getCategorias().addAll(Arrays.asList(cat2));
+		p5.getCategorias().addAll(Arrays.asList(cat3));
+		p6.getCategorias().addAll(Arrays.asList(cat3));
+		p7.getCategorias().addAll(Arrays.asList(cat4));
+		p8.getCategorias().addAll(Arrays.asList(cat5));
+		p9.getCategorias().addAll(Arrays.asList(cat6));
+		p10.getCategorias().addAll(Arrays.asList(cat6));
+		p11.getCategorias().addAll(Arrays.asList(cat7));
+
+		categoriaRepository.saveAll(Arrays.asList(cat,cat2,cat3,cat4,cat5,
+				cat6,cat7,cat8,cat9));
+		produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11));
 		
 		
 		Estado est1 = new Estado(null, "Minas Gerais");

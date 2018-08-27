@@ -11,7 +11,7 @@ public class StandardError implements Serializable {
 	private Integer status;
 	private String message;
 
-	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss.SSS")
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss.SSS", timezone = "America/Sao_Paulo")
 	private Date timeStamp;
 	
 	public StandardError(Integer status, String message, Date timeStamp) {
