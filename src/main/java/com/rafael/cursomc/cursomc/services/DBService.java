@@ -114,7 +114,7 @@ public class DBService {
         cidadeRepository.saveAll(Arrays.asList(c1,c2,c3));
 
 
-        Cliente cli1 = new Cliente(null, "Maria Silva", "maria@gmail.com", "36378912377", TipoCliente.PESSOA_FISICA);
+        Cliente cli1 = new Cliente(null, "Rafael Mendes", "bk.rafa@gmail.com", "36378912377", TipoCliente.PESSOA_FISICA);
 
         cli1.getTelefones().addAll(Arrays.asList("27363323", "93838393"));
 
