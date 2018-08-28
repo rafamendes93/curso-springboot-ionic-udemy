@@ -18,6 +18,9 @@ public class ClienteNewDTO implements Serializable {
     @Email(message = "Email inválido")
     private String email;
 
+    @NotEmpty(message = "A senha não pode estar vazia")
+    private String senha;
+
     @NotEmpty(message = "O CPF/CNPJ não pode estar vazio")
     private String cpfOuCnpj;
 
@@ -27,6 +30,7 @@ public class ClienteNewDTO implements Serializable {
     private String logradouro;
 
     private String numero;
+
     private String complemento;
 
     private String bairro;
@@ -146,5 +150,13 @@ public class ClienteNewDTO implements Serializable {
 
     public void setCidadeId(Integer cidadeId) {
         this.cidadeId = cidadeId;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 }
