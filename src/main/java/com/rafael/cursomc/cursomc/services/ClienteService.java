@@ -3,11 +3,14 @@ package com.rafael.cursomc.cursomc.services;
 import com.rafael.cursomc.cursomc.domain.Cidade;
 import com.rafael.cursomc.cursomc.domain.Cliente;
 import com.rafael.cursomc.cursomc.domain.Endereco;
+import com.rafael.cursomc.cursomc.domain.enums.Perfil;
 import com.rafael.cursomc.cursomc.domain.enums.TipoCliente;
 import com.rafael.cursomc.cursomc.dto.ClienteDTO;
 import com.rafael.cursomc.cursomc.dto.ClienteNewDTO;
 import com.rafael.cursomc.cursomc.repositories.ClienteRepository;
 import com.rafael.cursomc.cursomc.repositories.EnderecoRepository;
+import com.rafael.cursomc.cursomc.security.UserSS;
+import com.rafael.cursomc.cursomc.services.exception.AuthorizationException;
 import com.rafael.cursomc.cursomc.services.exception.DataIntegrityException;
 import com.rafael.cursomc.cursomc.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +39,12 @@ public class ClienteService {
 
 	
 	public Cliente find(Integer id) {
+
+		UserSS user = UserService.authenticated();
+
+		if (user == null || !user.hasRole(Perfil.ADMIN) && !id.equals(user.getId())){
+			throw new AuthorizationException("Acesso negado");
+		}
 		
 		//Implementação do JAVA 8, objeto OPTIONAL que encapsula uma categoria
 		//Optional pois ele é opcional (objeto ou nulo) para evitar nullpointerException
