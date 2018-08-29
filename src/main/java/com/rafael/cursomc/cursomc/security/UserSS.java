@@ -1,6 +1,5 @@
 package com.rafael.cursomc.cursomc.security;
 
-
 import com.rafael.cursomc.cursomc.domain.enums.Perfil;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,8 +9,8 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-//Classe que implementa o contrato de User Detail do Spring Security
-public class UserSpringSecurity implements UserDetails {
+
+public class UserSS implements UserDetails {
     private static final long serialVersionUID = 1L;
 
     private Integer id;
@@ -19,10 +18,10 @@ public class UserSpringSecurity implements UserDetails {
     private String senha;
     private Collection<? extends GrantedAuthority> authorities;
 
-    public UserSpringSecurity() {
+    public UserSS() {
     }
 
-    public UserSpringSecurity(Integer id, String email, String senha, Set<Perfil> perfis) {
+    public UserSS(Integer id, String email, String senha, Set<Perfil> perfis) {
         super();
         this.id = id;
         this.email = email;

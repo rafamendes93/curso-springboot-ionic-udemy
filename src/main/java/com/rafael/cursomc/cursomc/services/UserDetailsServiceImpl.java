@@ -2,25 +2,26 @@ package com.rafael.cursomc.cursomc.services;
 
 import com.rafael.cursomc.cursomc.domain.Cliente;
 import com.rafael.cursomc.cursomc.repositories.ClienteRepository;
-import com.rafael.cursomc.cursomc.security.UserSpringSecurity;
+import com.rafael.cursomc.cursomc.security.UserSS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+
 @Service
-public class UserDetailServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private ClienteRepository clienteRepository;
+    private ClienteRepository repo;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Cliente cliente = clienteRepository.findByEmail(email);
-
-        if (cliente == null) throw new UsernameNotFoundException(email + " não existe");
-
-        return new UserSpringSecurity(cliente.getId(),cliente.getEmail(),cliente.getSenha(), cliente.getPerfis());
+        Cliente cli = repo.findByEmail(email);
+        if (cli == null) {
+            throw new UsernameNotFoundException(email);
+        }
+        return new UserSS(cli.getId(), cli.getEmail(), cli.getSenha(), cli.getPerfis());
     }
 }
