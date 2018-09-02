@@ -32,8 +32,6 @@ public class Cliente implements Serializable {
 	@JsonIgnore
 	private String senha;
 
-	private String imageUrl;
-
 	@OneToMany(mappedBy="cliente",cascade = CascadeType.ALL)
 	List<Endereco> enderecos = new ArrayList<>();
 
@@ -71,14 +69,6 @@ public class Cliente implements Serializable {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
-	}
-
-	public String getImgUrl() {
-		return imageUrl;
-	}
-
-	public void setImgUrl(String imgUrl) {
-		this.imageUrl = imgUrl;
 	}
 
 	public Integer getId() {
