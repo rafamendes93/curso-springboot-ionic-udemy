@@ -15,6 +15,9 @@ import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+/**
+ * Classe para realizar upload de fotos para o S3 da Amazon
+ */
 @Service
 public class S3Service {
 
@@ -42,6 +45,13 @@ public class S3Service {
 
     }
 
+    /**
+     * Método que faz o upload no S3 da Amazon.
+     * @param is
+     * @param fileName
+     * @param contentType
+     * @return
+     */
     public URI uploadFiles(InputStream is, String fileName, String contentType){
 
         try {

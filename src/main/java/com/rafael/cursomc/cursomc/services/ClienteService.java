@@ -129,6 +129,11 @@ public class ClienteService {
 		newObj.setEmail(obj.getEmail());
 	}
 
+	/**
+	 * Faz o upload da imagem para o profile do cliente
+	 * @param multipartFile arquivo do tipo MultiPartFile enviado pelo usuário e convertido pelo Spring
+	 * @return Retorna o URL da imagem no S3 da Amazon
+	 */
 	public URI uploadProfilePicture(MultipartFile multipartFile){
 
 		UserSS user = UserService.authenticated();

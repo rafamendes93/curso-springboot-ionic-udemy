@@ -17,6 +17,12 @@ import java.io.InputStream;
 @Service
 public class ImageService {
 
+    /**
+     * Esse método pega uma imagem e verifica a extensão, caso seja png ele usa o método pngToJpg() para converter
+     * se não, ele apenas retorna a imagem do tipo BufferedImage
+     * @param uploadedFile imagem que foi feita upload
+     * @return retorna imagem do tipo BufferedImage
+     */
     public BufferedImage getJpgImageFromFile(MultipartFile uploadedFile){
         String ext = FilenameUtils.getExtension(uploadedFile.getOriginalFilename());
 
@@ -36,6 +42,11 @@ public class ImageService {
 
     }
 
+    /**
+     * Esse método converter imagens png para jpeg, para padronizar todas as imagens gravadas com extensão jpeg
+     * @param img a imagem a ser convertida
+     * @return retorna a imagem convertida para jpeg
+     */
     public BufferedImage pngToJpg(BufferedImage img) {
         BufferedImage jpgImage = new BufferedImage(img.getWidth(),img.getHeight(),BufferedImage.TYPE_INT_RGB);
 
@@ -53,6 +64,12 @@ public class ImageService {
         }
     }
 
+    /**
+     * Esse método corta a imagem, primeiro ele pega verifica qual é menor, a altura e a largura e guarda o
+     * valor em pixels.
+     * @param sourceImg imagem a ser cortada
+     * @return retorna a imagem cortada
+     */
     public BufferedImage cropSquare(BufferedImage sourceImg){
 
         int min = (sourceImg.getHeight() <= sourceImg.getWidth())? sourceImg.getHeight() : sourceImg.getWidth();
@@ -65,6 +82,12 @@ public class ImageService {
                 min);
     }
 
+    /**
+     * Esse método redimensiona a imagem baseada no valor de size.
+     * @param sourceImg imagem a ser redimensionada
+     * @param size valor em pixels para redimensionar a altura e a largura, esse valor é pego na chave "img.profile.size"
+     * @return retorna a imagem redimensionada
+     */
     public BufferedImage resize(BufferedImage sourceImg, int size){
         return Scalr.resize(sourceImg,Scalr.Method.ULTRA_QUALITY,size);
     }
