@@ -101,6 +101,31 @@ public class ClienteService {
 		return repo.findAll();
 	}
 
+	/**
+	 * Primeiramente esse método pega o usuário autenticado no momento.
+	 * Após a busca ele verifica se o Cliente logado é nulo (ou seja, não tem ninguém logado)
+	 * ou o perfil é ADMIN e o e-mail buscado é o mesmo e-mail procurado.
+	 * Então caso o IF seja true ele instância um novo Cliente buscando no DB pelo e-mail.
+	 * Caso essa busca retorne false, é lançado uma ObjectNotFoundException, caso ele passe  por todas as verificações
+	 * então é retornado o objeto cliente.
+	 * @param email e-mail do cliente a ser buscado
+	 * @return retorna o cliente buscado após passar pelas duas verificações
+	 */
+	public Cliente findByEmail(String email){
+		UserSS user = UserService.authenticated();
+
+		if (user == null || !user.hasRole(Perfil.ADMIN) && !email.equals(user.getUsername())){
+			throw new AuthorizationException("Acesso negado");
+		}
+		Cliente obj = repo.findByEmail(email);
+
+		if (obj == null){
+			throw new ObjectNotFoundException("Objeto não encontrado! ID: " + user.getId());
+		}
+
+		return obj;
+	}
+
 	public Page<Cliente> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
 		PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
 		return repo.findAll(pageRequest);
@@ -149,6 +174,8 @@ public class ClienteService {
 
 		return s3Service.uploadFiles(imageService.getInputStream(jpgImg,"jpg"),fileName, "image");
 	}
+
+
 
 
 

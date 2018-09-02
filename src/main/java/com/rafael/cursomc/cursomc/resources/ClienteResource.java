@@ -74,6 +74,21 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(listaDTO);
 	}
 
+	/**
+	 * Esse método é executado atráves do endpoint /clientes/email?value=EMAIL_A_SER_BUSCADO
+	 * Esse método busca todos os dados do cliente através do e-mail, o método findByEmail
+	 * permite apenas que o próprio usuário olhe suas informações ou um usuário com a role ADMIN faça isso.
+	 * @param email e-mail do usuário a ser buscado
+	 * @return retorna uma resposta HTTP 200 OK com os dados do objeto Cliente
+	 */
+	@RequestMapping(value = "/email", method = RequestMethod.GET)
+	public ResponseEntity<Cliente> find(@RequestParam(value = "value") String email){
+		Cliente obj = service.findByEmail(email);
+		return ResponseEntity.ok().body(obj);
+	}
+
+
+
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody ClienteNewDTO objDTO){
 		Cliente obj = service.fromDTO(objDTO);
