@@ -33,6 +33,13 @@ public class ClienteResource {
 		return ResponseEntity.ok().body(obj);
 	}
 
+    /**
+     * Esse método é executado quando o endpoint /clientes/id, então é buscado o ID do cliente
+     * mas apenas o cliente pode buscar pelo próprio id ou um cliente com role de ADMIN pode fazer isso.
+     * @param objDTO objeto do ClienteDTO que será convertido em Cliente no método
+     * @param id id do cliente a ser buscado
+     * @return Retorna uma resposta HTTP 204 No content com os dados do objeto Cliente
+     */
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
 	public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO objDTO, @PathVariable Integer id){
 		Cliente obj = service.fromDTO(objDTO);
