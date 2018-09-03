@@ -4,6 +4,7 @@ package com.rafael.cursomc.cursomc.repositories;
 import com.rafael.cursomc.cursomc.domain.Cidade;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,5 +15,6 @@ public interface CidadeRepository extends JpaRepository<Cidade, Integer> {
     //@Query("SELECT obj FROM Cidade obj WHERE obj.estado.id = :estado_id ORDER BY obj.nome")
    //List<Cidade> findCidades(@Param("estado_id") Integer estado_id);
 
+    @Transactional(readOnly = true)
     List<Cidade> findCidadesByEstado_Id(Integer estado_id);
 }

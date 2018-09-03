@@ -1,7 +1,6 @@
 package com.rafael.cursomc.cursomc.resources.exception;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class ValidationError extends StandardError {
@@ -9,8 +8,8 @@ public class ValidationError extends StandardError {
 
     private List<FieldMessage> errors = new ArrayList<>();
 
-    public ValidationError(Integer status, String message, Date timeStamp) {
-        super(status, message, timeStamp);
+    public ValidationError(Long timestamp, Integer status, String error, String message, String path) {
+        super(timestamp, status, error, message, path);
     }
 
     public List<FieldMessage> getErrors() {
